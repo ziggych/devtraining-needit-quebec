@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function(howisAngularService) {	
+	var c = this;		
+	
+	c.search = function() {
+var url = '/api/now/table/x_58872_needit_needit';
+return $http.get(url).then(function(response) {
+console.log(response);
+})};
+	
+  c.display = function() {		
+		c.data.message = (c.data.sometext) ? 'Hello ' + c.data.sometext + '!' : '';
+	}
+	
+	c.display();
+
+	c.confirmDelete = function() {
+		alert('clicked');
+	}
+	
+	c.data.somenumber2 = 4;
+	c.data.result2 = howisAngularService.square(c.data.somenumber2);
+	// UI-Script Einbindung nicht zum laufen gebracht - vielleicht UI-Script falsch?
+	// -> aber wohl eh besser Angular-Services nutzen
+	//var uiScript = new x_58872_needit.howis_ui_script();
+	//c.data.result3 = uiScript.square(c.data.somenumber2);
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>h1 {
+color: #428bca;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data>{
+	"data": {
+		"sometext": "world"
+	}
+}</demo_data>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>hello_howi</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Hello Howi</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+	
+	data.somenumber = 3;
+	data.result = new Howis_Script_Include().square(data.somenumber);
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-05-18 15:28:47</sys_created_on>
+        <sys_id>351e01082f1030101cba2e5df699b698</sys_id>
+        <sys_mod_count>45</sys_mod_count>
+        <sys_name>Hello Howi</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sp_widget_351e01082f1030101cba2e5df699b698</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-06-14 17:33:37</sys_updated_on>
+        <template><![CDATA[<div>
+  Enter your name:
+  <input type="text" ng-model="c.data.sometext" ng-change="c.display()"/>
+  <h1>{{ c.data.message }}</h1>
+  <div>Quadrat von {{data.somenumber}}: {{data.result}}</div> 
+  <div>Quadrat von {{data.somenumber2}}: {{data.result2}}</div>
+  <div>{{data.result3}}</div>
+</div><delete-button-confirm /> 
+<br/>
+<div ng-include="'howisTemplate'"></div> 
+<ng-include src="'howisTemplate'"></ng-include>  
+</div>
+
+<sn-record-picker field="location" 
+                  table="'x_58872_needit_needit'" 
+                  display-field="'number'" 
+                  value-field="'sys_id'" 
+                  search-fields="'number'" 
+                  page-size="100" >
+</sn-record-picker>
+
+<my-record-picker field="location" 
+                  table="'cmn_location'" 
+                  display-field="'name'" 
+                  value-field="'sys_id'" 
+                  search-fields="'name'" 
+                  page-size="10" >
+</my-record-picker>]]></template>
+    </sp_widget>
+</record_update>
